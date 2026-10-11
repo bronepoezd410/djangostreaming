@@ -1,40 +1,57 @@
-# Python/Django
-*.pyc
+```gitignore
+# Python / Django
+*.py[cod]
 __pycache__/
-*.pyo
-*.pyd
 .Python
 venv/
 env/
 ENV/
+.venv/
 *.sqlite3
 *.db
-migrations/
 *.log
 local_settings.py
 *.env
 .env
+.env.*
+!.env.example
 *.egg-info/
 dist/
 build/
-# Node.js/TypeScript/React
+
+# Python testing and tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node.js / TypeScript / React
 node_modules/
-npm-debug.log
-yarn-error.log
-yarn.lock
-package-lock.json
-dist/
-build/
+npm-debug.log*
+yarn-error.log*
 *.tsbuildinfo
 coverage/
 .eslintcache
-.parcel-cache
-.cache
+.parcel-cache/
+.cache/
+frontend/build/
 
 # Media and static files
 media/
 staticfiles/
 collected_static/
+
+# Database dumps and backups
+*.sql
+*.sql.gz
+*.dump
+*.bak
+*.backup
+mysql-volume-backup.tar.gz
+
+# Browser diagnostics
+*.har
 
 # IDE and editor files
 .idea/
@@ -45,8 +62,6 @@ collected_static/
 *.swp
 *~
 
-# Miscellaneous
-*.bak
-*.backup
+# Temporary files
 *.tmp
 *.temp

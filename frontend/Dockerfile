@@ -1,11 +1,12 @@
-from node:20
+
+FROM node:20
 
 WORKDIR /app
 
-COPY package.json yarn.lock ./
+COPY package.json ./
 
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
-COPY . . 
+COPY . .
 
-CMD ["yarn","start"]
+CMD ["yarn", "start"]
