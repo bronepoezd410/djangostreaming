@@ -30,11 +30,8 @@ class Film(models.Model):
     release_date = models.DateField()
     duration = models.IntegerField()
     image = models.ImageField(upload_to='films/', blank=True, null=True)
-
-    # Старое поле: video = models.FileField(...)
     video = models.FileField(upload_to='films/videos/', blank=True, null=True)
     video_path_encrypted = EncryptedTextField(blank=True, null=True)
-
     genres = models.ManyToManyField('Genre', through='FilmGenre')
 
     def __str__(self):

@@ -1,5 +1,5 @@
-import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaTelegram, FaVk } from "react-icons/fa";
+import { FaFacebookF, FaTelegram, FaVk } from "react-icons/fa6";
+
 
 const Footer = () => {
   return (
@@ -20,19 +20,25 @@ const Footer = () => {
         {/* Соцсети */}
         <div className="flex space-x-6">
           <a
-            href="#"
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-300 hover:text-red-500 transition-all duration-300 transform hover:scale-110 hover:shadow-md"
           >
             <FaFacebookF size={24} />
           </a>
           <a
-            href="#"
+            href="https://t.me"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-300 hover:text-red-500 transition-all duration-300 transform hover:scale-110 hover:shadow-md"
           >
             <FaTelegram size={24} />
           </a>
           <a
-            href="#"
+            href="https://vk.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-300 hover:text-red-500 transition-all duration-300 transform hover:scale-110 hover:shadow-md"
           >
             <FaVk size={24} />

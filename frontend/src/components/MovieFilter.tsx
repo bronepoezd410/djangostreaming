@@ -53,14 +53,7 @@ const MovieFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
   };
 
   return (
-    <div
-      className="sticky top-4 ml-4 bg-gradient-to-br from-gray-900 to-gray-800 p-6 pb-12 rounded-xl shadow-2xl z-10 mt-4 max-h-[calc(100vh-80px)] overflow-hidden border border-gray-700 w-160"
-      // Для смещения вправо или влево ml-4 или добавь mr-4:
-      // - ml-2 = 8px влево
-      // - ml-6 = 24px влево
-      // - mr-4 = 16px вправо (добавь вместо ml-4 для смещения вправо)
-      // Пример: className="... ml-6" или className="... mr-4"
-    >
+    <div className="sticky top-4 ml-4 bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-xl shadow-2xl z-10 mt-4 max-h-[calc(100vh-80px)] border border-gray-700 w-160 flex flex-col">
       <h2 className="text-2xl font-bold mb-6 text-white tracking-tight">Фильтры</h2>
 
       {error && <p className="text-red-400 mb-4 font-medium">{error}</p>}
@@ -76,28 +69,36 @@ const MovieFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
         />
       </div>
 
-      <div className="mb-6">
+      <div className="mb-6 flex-1 overflow-hidden">
         <label className="block text-sm font-medium text-gray-300 mb-2">Жанры</label>
-        <div className="grid grid-cols-2 gap-3">
-          {genres.length > 0 ? (
-            genres.map((genre) => (
-              <label
-                key={genre.id}
-                className="flex items-center space-x-2 cursor-pointer p-2 rounded-lg hover:bg-gray-700 transition duration-150"
-              >
-                <input
-                  type="checkbox"
-                  value={genre.name}
-                  checked={selectedGenres.includes(genre.name)}
-                  onChange={() => handleGenreChange(genre.name)}
-                  className="w-5 h-5 text-red-500 bg-gray-800 border-gray-600 rounded-md focus:ring-red-500 focus:ring-opacity-50"
-                />
-                <span className="text-gray-200 text-sm">{genre.name}</span>
-              </label>
-            ))
-          ) : (
-            <p className="text-gray-400 text-sm col-span-2">Жанры загружаются...</p>
-          )}
+        <div
+          className="max-h-48 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-red-500 scrollbar-track-gray-800"
+          style={{
+            scrollbarWidth: "thin",
+            scrollbarColor: "#ef4444 #1f2937",
+          }}
+        >
+          <div className="grid grid-cols-2 gap-3">
+            {genres.length > 0 ? (
+              genres.map((genre) => (
+                <label
+                  key={genre.id}
+                  className="flex items-center space-x-2 cursor-pointer p-2 rounded-lg hover:bg-gray-700 transition duration-150"
+                >
+                  <input
+                    type="checkbox"
+                    value={genre.name}
+                    checked={selectedGenres.includes(genre.name)}
+                    onChange={() => handleGenreChange(genre.name)}
+                    className="w-5 h-5 text-red-500 bg-gray-800 border-gray-600 rounded-md focus:ring-red-500 focus:ring-opacity-50"
+                  />
+                  <span className="text-gray-200 text-sm">{genre.name}</span>
+                </label>
+              ))
+            ) : (
+              <p className="text-gray-400 text-sm col-span-2">Жанры загружаются...</p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -136,8 +137,7 @@ const MovieFilter: React.FC<FilterProps> = ({ onFilterChange }) => {
         </div>
       </div>
 
-      {/* Кнопки с отступом вниз */}
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3">
         <button
           className="flex-1 bg-gradient-to-r from-red-600 to-orange-500 hover:from-orange-600 hover:to-red-600 text-white py-3 rounded-full font-semibold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
           onClick={handleFilterChange}

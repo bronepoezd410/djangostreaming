@@ -8,13 +8,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-SECRET_KEY = 'django-insecure-^hooipk+4a#6guee5rfp!c7ms$*redtmtglb2=ubw&mh!*p8)#'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'default-secret-key-for-local-dev')
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = False  # Отключаем доступ для всех источников
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://frontend:3000",
+]
 
 
 
@@ -70,23 +74,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'StreamingCepu.wsgi.application'
 
 AUTHENTICATION_BACKENDS = [
-    'axes.backends.AxesStandaloneBackend',  # Для блокировки
-    'axes.backends.AxesBackend',  # Для JWT и стандартной аутентификации
-    'django.contrib.auth.backends.ModelBackend',  # Стандартная аутентификация
+    'axes.backends.AxesStandaloneBackend',  
+    'axes.backends.AxesBackend', 
+    'django.contrib.auth.backends.ModelBackend',  
 ]
 AXES_ENABLED = True
-AXES_FAILURE_LIMIT = 5  # 5 попыток
-AXES_COOLOFF_TIME = 1  # Блокировка на 1 час
+AXES_FAILURE_LIMIT = 5 
+AXES_COOLOFF_TIME = 1  
 AXES_RESET_ON_SUCCESS = True
 AXES_VERBOSE = True
 AXES_LOCKOUT_CALLABLE = 'core.views.lockout_response'
-AXES_USERNAME_FORM_FIELD = 'username'  # Поле username в запросе
-AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]  # Блокировка по комбинации username и ip_address
+AXES_USERNAME_FORM_FIELD = 'username'  
+AXES_LOCKOUT_PARAMETERS = [["username", "ip_address"]]  
 
-# Убедимся, что BASE_DIR указывает на корень проекта
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Создаём папку logs, если она не существует
 LOG_DIR = os.path.join(BASE_DIR, 'logs')
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
@@ -125,13 +127,16 @@ LOGGING = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'StreamingCepuDB',        
-        'USER': 'root',        
-        'PASSWORD': '',  
-        'HOST': 'localhost',          
-        'PORT': '3306',              
+        'NAME': os.getenv('MYSQL_DATABASE', 'mydb'),
+        'USER': os.getenv('MYSQL_USER', 'myuser'),
+        'PASSWORD': os.getenv('MYSQL_PASSWORD', 'mypassword'),
+        'HOST': 'db',
+        'PORT': '3306',
     }
 }
+
+
+
 
 CONTENT_SECURITY_POLICY = {
     'DIRECTIVES': {

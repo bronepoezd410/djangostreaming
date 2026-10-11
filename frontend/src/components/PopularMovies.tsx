@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import MovieCard from './MovieCard';
-
+console.log('API URL:', process.env.REACT_APP_API_URL);
 const PopularMovies = () => {
   const [movies, setMovies] = useState<any[]>([]);
   const movieContainerRef = useRef<HTMLDivElement | null>(null);
